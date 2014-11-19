@@ -1,0 +1,20 @@
+form,
+section.countryData {
+	float: left;
+}
+
+form {
+	width: 30%;
+	padding: 10px;
+	overflow: hidden;
+}
+
+select.countries {
+	border: none;
+}
+
+section.countryData {
+	width: 65%;
+	height: 400px;
+	border: 1px solid red;
+}
