@@ -1,0 +1,98 @@
+body {
+	@include primaryFontStack;
+	font-size: $fontSize;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	padding: 20px 0;
+	font-family: $headerFont;
+	font-size: $fontSize*3.5;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+p {
+	font-size: $fontSize;
+}
+
+header p {
+	margin-bottom: 15px;
+	&:first-of-type {
+		margin-top: 15px;
+	}
+}
+
+.moreInfo {
+	h3 {
+		font-family: $headerFont;
+		color: $primaryColour;
+	}
+	ul {
+		padding: 0;
+		margin: 10px 0 0;
+	}
+	li {
+		list-style-type: none;
+		padding: 0;
+	}
+}
+
+h3.select {
+	padding: 5px;
+	border-bottom: 1px dotted $primaryColour;
+	font-family: $headerFont;
+}
+
+select.countries {
+	option {
+		-webkit-transition: all 0.1s;
+		transition: all 0.1s;
+		&:nth-child(odd){
+			background: darken($bodyBkg, 4);
+		}
+		&:nth-child(even){
+			background: $bodyBkg;
+		}
+		&:hover {
+			background: darken($bodyBkg, 15);
+			color: #fff;
+			cursor: pointer;
+		}
+	}
+}
+
+.selected {
+	background: darken($bodyBkg, 15);
+	border: none;
+	box-shadow: none;
+	color: #fff;
+	cursor: default;
+}
+
+section.countryData {
+	text-align: center;
+	h3#countryName {
+		font-size: $fontSize*2;
+	}
+
+	h4#percentage {
+		font-size: $fontSize*1.3;
+		width: 60%;
+		margin: 10px auto 50px;
+
+	}
+
+}
+
+#pageload {
+	text-align: center;
+	padding: 10% 0;
+	h2 {
+		font-family: $headerFont
+	}
+}

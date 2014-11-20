@@ -3,28 +3,68 @@
 <head>
 	<meta charset="UTF-8">
 	<title>World Toilet Day</title>
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400|Montserrat' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
+<header class="clearfix">
+	<h1><div class="container">The Politics of Shit</div></h1>
+		<!-- <div class="container">
+			<div class="details">
+				<p>It's easy to take how and where we go to the toilet for granted, but </p>
+			</div>
+			<div class="moreInfo">
+			<h3>Find Out More</h3>
+				<ul>
+					<li><a href="http://worldtoilet.org/" blank="_target">World Toilet Organization</a></li>
+					<li><a href="http://www.unwater.org/worldtoiletday/home/en/" target="_blank">World Toilet Day</a></li>
+					<li><a href="http://youtu.be/CdZJ0SMbh10" target="_blank">TED Talk: Sanitation is a basic human right</a></li>
+				</ul>
+			</div>
+		</div> -->
+</header>
+
 <div class="wrapper clearfix">
+<div id="pageload">
+	<h2>Flushing out data...</h2>
+</div>
 	<form>
-		<select class="countries" size="10">
+	<h3 class="select">Select a country</h3>
+		<select class="countries" size="7">
 			
 		</select>
 	</form>
 	<section class="countryData">
-		<canvas id="graph">
-			
-		</canvas>
-		<h2 class="countryName"></h2>
-		<h4 class="totalpop"></h4>
-		<h3 class="total"></h3>
-		<h3 class="rural"></h3>
-		<h3 class="urban"></h3>
-		<h5 class="year"></h5>
+	<h3 id="countryName"><!-- Afghanistan --></h3>
+	<h4 id="percentage">What percentage of the population uses improved sanitation facilities?</h4>
+		<div class="data clearfix">
+			<div id="total">
+				<div class="chart">
+					<!-- <input type="text" class="dial" value="50"> -->
+				</div>
+				<h4><span class="percent"></span>% of total population</h4>
+			</div>
+			<div id="rural">
+				<div class="chart">
+					<!-- <input type="text" class="dial" value="30"> -->
+				</div>
+				<h4><span class="percent"></span>% of the rural population</h4>
+			</div>
+			<div id="urban">
+				<div class="chart">
+				<!-- 	<input type="text" class="dial" value="60"> -->
+				</div>
+				<h4><span class="percent"></span>% of the urban population</h4>
+			</div>
+		</div>
 	</section>
+	<footer>
+		
+	</footer>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/jquery.knob.js"></script>
 <script src="js/script.js"></script>
 	
 </body>

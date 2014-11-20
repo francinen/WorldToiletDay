@@ -1,0 +1,29 @@
+$bodyBkg: #ddd5be;
+$primaryColour: #7f4f27; 
+
+@font-face {
+    font-family: 'helsinkiregular';
+    src: url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.eot');
+    src: url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.woff') format('woff'),
+         url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.ttf') format('truetype'),
+         url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.svg#helsinkiregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+$headerFont: 'helsinkiregular';
+$primaryFont: 'Source Sans Pro';
+$fontSize: 1.1em;
+
+@mixin primaryFontStack {
+	font-family: $primaryFont, "Helvetica Neue",Helvetica,Arial,sans-serif 
+}
+
+
+
+h1 {
+	background: $primaryColour;
+	color: $bodyBkg;
+}
