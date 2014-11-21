@@ -109,57 +109,84 @@ toiletApp.getCountryData = function(){
 	});
 };
 
-
-
 toiletApp.parseCountryData = function(countryData){
-	// ERRORS: 
-	// 1) Less than 3 objects
-	// 2) Only one residence area for multiple objects
-	// Filter by year?
 	if (countryData.length>=3){
 		for (var i=0;i<3;i++){
 			$('#countryName').text(countryData[i].area_name);
 			var area = countryData[i]['residence area'];
 			var percent = countryData[i].value;
 			if (area=='Total'){
-				var total = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
-				$('#total .chart').prepend(total);
-				toiletApp.displayData();
-				$('#total').find('.percent').text(percent);
+				if (i>0){
+					if (area==countryData[0]['residence area']){
+						$('section.countryData').hide();
+						$('section.error').show();
+						$('#countryNameError').text(countryData[i].area_name);
+					}else{
+						var total = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
+						$('#total .chart').prepend(total);
+						toiletApp.displayData();
+						$('#total').find('.percent').text(percent);
+						$('section.countryData').show();
+						$('section.error').hide();
+					}
+				}else{
+					var total = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
+					$('#total .chart').prepend(total);
+					toiletApp.displayData();
+					$('#total').find('.percent').text(percent);
+					$('section.countryData').show();
+					$('section.error').hide();
+				}
 			}else if (area=='Rural'){
-				var rural = $('<input>').addClass('dial').attr({'type':'text', 'value':countryData[i].value});
-				$('#rural .chart').prepend(rural);
-				toiletApp.displayData();
-				$('#rural').find('.percent').text(percent);
-			}else{
-				var urban = $('<input>').addClass('dial').attr({'type':'text', 'value':countryData[i].value});
-				$('#urban .chart').prepend(urban);
-				toiletApp.displayData();
-				$('#urban').find('.percent').text(percent);
+				if (i>0){
+					if (area==countryData[0]['residence area']){
+						$('section.countryData').hide();
+						$('section.error').show();
+						$('#countryNameError').text(countryData[i].area_name);
+					}else{
+						var rural = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
+						$('#rural .chart').prepend(rural);
+						toiletApp.displayData();
+						$('#rural').find('.percent').text(percent);
+						$('section.countryData').show();
+						$('section.error').hide();
+					}
+				}else{
+					var rural = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
+					$('#rural .chart').prepend(rural);
+					toiletApp.displayData();
+					$('#rural').find('.percent').text(percent);
+					$('section.countryData').show();
+					$('section.error').hide();
+				}
+			}else if (area=='Urban'){
+				if (i>0){
+					if (area==countryData[0]['residence area']){
+						$('section.countryData').hide();
+						$('section.error').show();
+						$('#countryNameError').text(countryData[i].area_name);
+					}else{
+						var urban = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
+						$('#urban .chart').prepend(urban);
+						toiletApp.displayData();
+						$('#urban').find('.percent').text(percent);
+						$('section.countryData').show();
+						$('section.error').hide();
+					}
+				}else{
+					var urban = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
+					$('#urban .chart').prepend(urban);
+					toiletApp.displayData();
+					$('#urban').find('.percent').text(percent);
+					$('section.countryData').show();
+					$('section.error').hide();
+				}
 			}
 		}
 	}else{
-		for (var i=0;i<countryData.length;i++){
-			$('#countryName').text(countryData[i].area_name);
-			var area = countryData[i]['residence area'];
-			var percent = countryData[i].value;
-			if (area=='Total'){
-				var total = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
-				$('#total .chart').prepend(total);
-				toiletApp.displayData();
-				$('#total').find('.percent').text(percent);
-			}else if (area=='Rural'){
-				var rural = $('<input>').addClass('dial').attr({'type':'text', 'value':countryData[i].value});
-				$('#rural .chart').prepend(rural);
-				toiletApp.displayData();
-				$('#rural').find('.percent').text(percent);
-			}else{
-				var urban = $('<input>').addClass('dial').attr({'type':'text', 'value':countryData[i].value});
-				$('#urban .chart').prepend(urban);
-				toiletApp.displayData();
-				$('#urban').find('.percent').text(percent);
-			}
-		}
+		$('section.countryData').hide();
+		$('section.error').show();
+		$('#countryNameError').text(countryData[i].area_name);	
 	}
 	
 };

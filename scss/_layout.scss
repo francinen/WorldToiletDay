@@ -103,12 +103,30 @@ section.countryData {
 	text-align: center;	
 }
 
+#rural > div, 
+#urban > div {
+	width: 100%;
+}
+
 #rural {
 	padding-right: 5%;
 }
 
 #urban {
 	padding-left: 5%;
+}
+
+section.error {
+	text-align: center;
+	display: none;
+	object {
+		width: 250px;
+		height: 250px;
+		display: inline-block;
+		svg {
+			width: 100%;
+		}
+	}
 }
 
 
