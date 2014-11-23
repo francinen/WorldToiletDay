@@ -173,12 +173,12 @@ header {
   left: 0; }
 
 form, section.countryData {
-  float: left;
-  visibility: hidden; }
+  float: left; }
 
 form {
   width: 25%;
-  overflow: hidden; }
+  overflow: hidden;
+  visibility: hidden; }
 
 select.countries {
   border: none;
@@ -192,6 +192,9 @@ select.countries {
 section.countryData {
   width: 70%;
   margin: 40px 0 150px 5%; }
+
+section.three, section.two, section.one {
+  display: none; }
 
 #total {
   width: 85%;
