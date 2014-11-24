@@ -19,8 +19,8 @@ toiletApp.displayData = function(){
 		readOnly: true,
 		width: '90%',
 		thickness: '.25',
-		bgColor: '#7f4f27',
-		fgColor: '#c3b48c'
+		fgColor: '#8a6755',
+		bgColor: '#a2af9f'
 	});
 };
 
@@ -30,15 +30,24 @@ toiletApp.getCountries = function(){
 		type: 'GET',
 		dataType: 'json',
 		success: function(countries){
+			$('form').css({'opacity':1});
+			$('.countryData').fadeIn();
 			console.log(countries);
 			for (var i=0;i<countries.length;i++){
 				arrCountryNames.push(countries[i].name);
 			}
 			arrCountryNames = arrCountryNames.sort();
 			toiletApp.listCountries(arrCountryNames);
+			toiletApp.autoComplete(arrCountryNames);
 			toiletApp.getCountryData();
 			toiletApp.pageLoad();
 		}
+	});
+};
+
+toiletApp.autoComplete = function(arr){
+	$('#searchCountry').autocomplete({
+		source: arr
 	});
 };
 
@@ -50,7 +59,7 @@ toiletApp.ajaxRequest = function(country, apiID, apiKey){
 		success: function(countryData){
 			console.log(countryData);
 			$('.chart').empty();
-			toiletApp.parseCountryData(countryData);		
+			toiletApp.parseCountryData(countryData);
 		}
 	});
 };
@@ -59,31 +68,86 @@ toiletApp.listCountries = function(arr){
 	var random = Math.floor(Math.random()*(arr.length));
 	$.each(arr, function(i, country){
 		var countryName = $('<option>').text(arr[i]).attr('value',arr[i]);
-		if (i==random){
-			country = arr[i];
-			if (!country.match(/\s/g)){
-				toiletApp.ajaxRequest(country, apiID, apiKey);
-			}else{
-				country = country.replace(/\s/g, '%20');
-				toiletApp.ajaxRequest(country, apiID, apiKey);
-			}		
-		}
 		$countriesList.append(countryName);
 	});
+	$('#countryList').show();
+};
+
+toiletApp.randomCountry = function(arr, country, apiID, apiKey){
+	var random = Math.floor(Math.random()*(arr.length));
+	country = arr[random];
+		if (!country.match(/\s/g)){
+			toiletApp.ajaxRequest(country, apiID, apiKey);
+		}else{
+			country = country.replace(/\s/g, '%20');
+			toiletApp.ajaxRequest(country, apiID, apiKey);
+		}		
+};
+
+toiletApp.userInput = function(country, apiID, apiKey){
+		selected = document.querySelector('#searchCountry');
+	country = selected.value;
+	if (!country.match(/\s/g)){
+		toiletApp.ajaxRequest(country, apiID, apiKey);
+	}else{
+		country = el.value.replace(/\s/g, '%20');
+		toiletApp.ajaxRequest(country, apiID, apiKey);
+	}		
 };
 
 toiletApp.getCountryData = function(){
 	var country;
+	var selected;
 	$('.countries').change(function(){
-		country = $('option:selected').attr('value');
+		selected = $('option:selected');
+		country = selected.attr('value');
 		if (!country.match(/\s/g)){
 			toiletApp.ajaxRequest(country, apiID, apiKey);
 		}else{
-			country = $('option:selected').attr('value').replace(/\s/g, '%20');
+			country = selected.attr('value').replace(/\s/g, '%20');
 			toiletApp.ajaxRequest(country, apiID, apiKey);
-		}		
+		}	
 	});
+	$('#searchButton').on('click', function(e){
+		toiletApp.userInput(country, apiID, apiKey);	
+	});
+	$('.ui-autocomplete').on('click','li',function(){
+		toiletApp.userInput(country, apiID, apiKey);	
+	});
+	$('#random').on('click', function(){
+		toiletApp.randomCountry(arrCountryNames, country, apiID, apiKey);
+	});
+
 };
+
+
+toiletApp.showOne = function(countryData, area, percent, chart){
+	i=0;
+	$('div.dataInfo, div.one').show();
+	$('div.three, div.two').hide(); 
+	$('section.error, div.default').hide();
+	$('#area .chart').prepend(chart);
+	toiletApp.displayData();
+	$('#area').find('.percent').text(countryData[i].value);
+	$('#area').find('.area').text(countryData[i]['residence area']);
+};
+
+toiletApp.showTwo = function(){
+	$('div.dataInfo, div.two').show();
+	$('div.three, div.one').hide();
+	$('section.error, div.default').hide();
+
+};
+
+toiletApp.showThree = function(countryData, area, percent, chart, id){
+	$('div.dataInfo, div.three').show();
+	$('div.one, div.two').hide(); 
+	$('section.error, div.default').hide();
+	$('#'+id+' .chart').prepend(chart);
+	toiletApp.displayData();
+	$('#'+id).find('.percent').text(percent);
+};
+
 
 toiletApp.evalData = function(i, area, percent, countryData, id){
 	$chart = $('<input>').addClass('dial').attr({'type':'text', 'value':percent});
@@ -91,7 +155,7 @@ toiletApp.evalData = function(i, area, percent, countryData, id){
 	if (i===0){
 		// if first index matches second
 		if (area===countryData[1]['residence area']&&area===countryData[2]['residence area']){
-				toiletApp.showOne(area, percent, $chart);
+				toiletApp.showOne(countryData, area, percent, $chart);
 				console.log('Match!');
 				console.log(countryData[1]['residence area']);
 				console.log(countryData[2]['residence area']);
@@ -106,7 +170,7 @@ toiletApp.evalData = function(i, area, percent, countryData, id){
 		}
 		// if first index is unique
 		else if(area !== countryData[2]['residence area'] && area !== countryData[1]['residence area']){
-			toiletApp.showThree(area, percent, $chart, id);
+			toiletApp.showThree(countryData, area, percent, $chart, id);
 			console.log('No match!');
 		}
 	}else if(i===1){
@@ -118,48 +182,32 @@ toiletApp.evalData = function(i, area, percent, countryData, id){
 			$('#area2').find('.area').text(area);
 		}
 		else{
-			toiletApp.showThree(area, percent, $chart, id);
+			toiletApp.showThree(countryData, area, percent, $chart, id);
 		}
 	}
 	else if (i===2){
-		if(area !== countryData[0]['residence area'] && area !== countryData[1]['residence area']){
-			toiletApp.showThree(area, percent, $chart, id);
+		if(countryData[2].year != 2006){
+			toiletApp.showOne(countryData, area, percent, $chart);
+			console.log('The year is '+countryData[2].year);
+		}else{
+			toiletApp.showThree(countryData, area, percent, $chart, id);
 			console.log('No matches!');
 		}
+
 	}
 };
 
-toiletApp.showOne = function(area, percent, chart){
-	$('section.one').show();
-	$('section.three, section.two').hide(); 
-	$('section.error').hide();
-	$('#area .chart').prepend(chart);
-	toiletApp.displayData();
-	$('#area').find('.percent').text(percent);
-	$('#area').find('.area').text(area);
-};
-
-toiletApp.showTwo = function(){
-	$('section.two').show();
-	$('section.three, section.one').hide();
-	$('section.error').hide();
-};
-
-toiletApp.showThree = function(area, percent, chart, id){
-	$('section.three').show();
-	$('section.one, section.two').hide(); 
-	$('section.error').hide();
-	$('#'+id+' .chart').prepend(chart);
-	toiletApp.displayData();
-	$('#'+id).find('.percent').text(percent);
-};
-
 toiletApp.parseCountryData = function(countryData){
-	for (i=2;i>=0;i--){
-		if (countryData.length>=3){
-				$('#countryName').text(countryData[i].area_name);
-				var area = countryData[i]['residence area'];
-				var percent = countryData[i].value;
+	if (countryData[2].year != 2006 && countryData[1].year != 2006 && countryData[0].year != 2006){
+		$('section.one, section.two, section.three').hide();
+		$('section.error').show();
+		$('#countryNameError').text(countryData[2].area_name);	
+	}else{
+		$('#countryName').text(countryData[0].area_name);
+		for (i=2;i>=0;i--){
+			area = countryData[i]['residence area'];
+			percent = 100-(countryData[i].value);
+			if (countryData.length>=3){	
 				if (area==='Total'){
 					toiletApp.evalData(i, area, percent, countryData, 'total');
 				}else if (area==='Rural'){
@@ -167,24 +215,38 @@ toiletApp.parseCountryData = function(countryData){
 				}
 				else if (area==='Urban'){
 					toiletApp.evalData(i, area, percent, countryData, 'urban');
-				}
-			
-		} //END OF IF STATEMENT
-		else{
-			$('section.one, section.two, section.three').hide();
-			$('section.error').show();
-			$('#countryNameError').text(countryData[i].area_name);	
-		}
-	} //END OF FOR LOOP
+				}	
+			} //END OF IF STATEMENT
+			else{
+				$('section.one, section.two, section.three').hide();
+				$('section.error').show();
+				$('#countryNameError').text(countryData[2].area_name);	
+			}
+		} //END OF FOR LOOP
+	}
+
 }; //END OF METHOD
-	
+
 $(function(){
+	$('body').on('click', 'button', function(e){
+		e.preventDefault();
+	});
 	toiletApp.init();
+	function toggleList(){
+		$('#countryList').toggleClass('fa-sort-desc').toggleClass('fa-sort-asc');
+		$('select').slideToggle(800);
+	}
+	$('.selectCountry').on('click', function(){
+		toggleList();
+	});
+	$('select').on('click', 'option', function(){
+		toggleList();
+	});
 	$('.dial').knob({
 		readOnly: true,
 		width: '90%',
 		thickness: '.25',
-		bgColor: '#7f4f27',
-		fgColor: '#c3b48c'
+		fgColor: '#8a6755',
+		bgColor: '#d7d8be'
 	});
 });

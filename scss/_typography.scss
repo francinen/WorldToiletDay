@@ -1,5 +1,9 @@
+html {
+	font-size: 62.5%;
+}
+
 body {
-	@include primaryFontStack;
+	@include fontStack;
 	font-size: $fontSize;
 }
 
@@ -8,12 +12,29 @@ h1, h2, h3, h4, h5, h6, p {
 	padding: 0;
 }
 
+h1, h2, h3, h4, input[name="searchCountry"] {
+	font-family: $headerFont;
+	color: $primaryColour;
+}
+
 h1 {
 	padding: 20px 0;
-	font-family: $headerFont;
-	font-size: $fontSize*3.5;
-	text-align: center;
+	// text-align: center;
 	margin-bottom: 40px;
+	span {
+		display: block;
+	}
+	span.who {
+		font-size: $fontSize*3;
+		letter-spacing: 3.6px;
+		font-weight: 200;
+		color: darken($primaryColour,10);
+
+	}
+	span.sanitation {
+		font-size: $fontSize*4.5;
+		text-transform: uppercase;
+	}
 }
 
 p {
@@ -29,7 +50,6 @@ header p {
 
 .moreInfo {
 	h3 {
-		font-family: $headerFont;
 		color: $primaryColour;
 	}
 	ul {
@@ -42,13 +62,15 @@ header p {
 	}
 }
 
-h3.select {
-	padding: 5px;
-	border-bottom: 1px dotted $primaryColour;
-	font-family: $headerFont;
+form, fieldset {
+	position: relative;
 }
 
 select.countries {
+	position: absolute;
+	top: 90%;
+	z-index: 100;
+	border-top: 1px dotted $primaryColour;
 	option {
 		-webkit-transition: all 0.1s;
 		transition: all 0.1s;
@@ -66,6 +88,24 @@ select.countries {
 	}
 }
 
+input[name="searchCountry"]{
+	border: none;
+	background: none;
+	box-shadow: none;
+	border-bottom: 1px dotted $primaryColour;
+	outline: none;
+	width: 70%;
+	margin-left: 5px;
+	font-size: $fontSize*1.5;
+}
+
+button.random, button#searchButton {
+	box-shadow: none;
+	border: none;
+	background: none;
+	// color: $primaryColour;
+}
+
 .selected {
 	background: darken($bodyBkg, 15);
 	border: none;
@@ -76,15 +116,29 @@ select.countries {
 
 section.countryData {
 	text-align: center;
-	h3#countryName {
+	div.default p {
 		font-size: $fontSize*2;
+		color: $secondaryColour;
+		&:first-of-type {
+			margin-bottom: 20px;
+		}
 	}
-
-	h4#percentage {
+	h2, h3 { 
+		color: #4f464d;
+	}
+	h2#countryName {
+		font-size: $fontSize*4;	
+		margin-bottom: 20px;
+	}
+	h3 {
+		font-size: $fontSize*1.5;
+	}
+	h4 {
 		font-size: $fontSize*1.3;
-		width: 60%;
-		margin: 10px auto 50px;
-
+		color: #8a6755;
+	}
+	h5#percentage {
+		font-size: $fontSize;
 	}
 
 }
@@ -92,7 +146,4 @@ section.countryData {
 #pageload {
 	text-align: center;
 	padding: 10% 0;
-	h2 {
-		font-family: $headerFont
-	}
 }

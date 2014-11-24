@@ -1,29 +1,29 @@
-$bodyBkg: #ddd5be;
-$primaryColour: #7f4f27; 
+// $bodyBkg: #ddd5be;
+$bodyBkg: #fff;
+// $primaryColour: #7f4f27;
+$primaryColour: #fff;
+$secondaryColour: #4f464d;
+
 
 @font-face {
-    font-family: 'helsinkiregular';
-    src: url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.eot');
-    src: url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.woff') format('woff'),
-         url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.ttf') format('truetype'),
-         url('../assets/fonts/helsinki_regular_macroman/helsinki-webfont.svg#helsinkiregular') format('svg');
+    font-family: 'corehumanistsansregular';
+    src: url('../assets/fonts/corehumanistsans_regular_macroman/CoreHumanistSans-Regular-webfont.eot');
+    src: url('../assets/fonts/corehumanistsans_regular_macroman/CoreHumanistSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../assets/fonts/corehumanistsans_regular_macroman/CoreHumanistSans-Regular-webfont.woff2') format('woff2'),
+         url('../assets/fonts/corehumanistsans_regular_macroman/CoreHumanistSans-Regular-webfont.woff') format('woff'),
+         url('../assets/fonts/corehumanistsans_regular_macroman/CoreHumanistSans-Regular-webfont.ttf') format('truetype'),
+         url('../assets/fonts/corehumanistsans_regular_macroman/CoreHumanistSans-Regular-webfont.svg#corehumanistsansregular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
-$headerFont: 'helsinkiregular';
-$primaryFont: 'Source Sans Pro';
-$fontSize: 1.1em;
+@import url("http://fonts.googleapis.com/css?family=Questrial");
 
-@mixin primaryFontStack {
-	font-family: $primaryFont, "Helvetica Neue",Helvetica,Arial,sans-serif 
+$headerFont: 'corehumanistsansregular';
+$primaryFont: 'Questrial';
+$fontSize: 1.6rem;
+
+@mixin fontStack {
+	font-family: $primaryFont, "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-
-
-h1 {
-	background: $primaryColour;
-	color: $bodyBkg;
-}

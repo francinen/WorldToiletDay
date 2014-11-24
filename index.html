@@ -3,13 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>World Toilet Day</title>
-	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400|Montserrat' rel='stylesheet' type='text/css'>
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="css/main.css">
 
 </head>
 <body>
+
 <header class="clearfix">
-	<h1><div class="container">The Politics of Shit</div></h1>
+	<h1><div class="container"><span class="who">who can't get no </span><span class="sanitation">Sanitation?</span></div></h1>
 		<!-- <div class="container">
 			<div class="details">
 				<p>It's easy to take how and where we go to the toilet for granted, but </p>
@@ -26,61 +29,73 @@
 </header>
 
 <div class="wrapper clearfix">
-<div id="pageload">
-	<h2>Flushing out data...</h2>
-</div>
-	<form>
-	<h3 class="select">Select a country</h3>
-		<select class="countries" size="7">
-			
-		</select>
+	<form class="row">
+		<fieldset class="col-md-4">
+			<h3 class="selectCountry">Select a country <i id="countryList" class="fa fa-sort-desc"></i></h3>
+			<select class="countries" size="7">
+					
+			</select>
+		</fieldset>
+		<fieldset class="col-md-5">
+			<label for="searchCountry"><h3>Search: </h3></label>
+			<input type="text" name="searchCountry" id="searchCountry"><button id="searchButton"><i class="fa fa-search"></i></button>
+		</fieldset>
+		<fieldset class="col-md-3">
+			<button class="random" id="random"><h3>Get a random country</h3></button>
+		</fieldset>
 	</form>
-	<section class="countryData three">
-		<h3 id="countryName"><!-- Afghanistan --></h3>
-		<h4 id="percentage">What percentage of the population uses improved sanitation facilities?</h4>
-		<div class="data clearfix">
-			<div id="total">
+	<section class="countryData row">
+		<div class="default">
+			<p>It's easy to take a working toilet for granted. Yet 2.6 billion people lack access to clean and safe toilets, making them vulnerable to illness, poverty, and abuse.</p>
+			<p>Search for a country above to find out how much of its population is lacking the right to sanitation.</p>
+		</div>
+<!-- 		<div class="pageLoad">
+			<p>It's easy to take a working toilet for granted. Yet 2.6 billion people lack access to clean and safe toilets, making them vulnerable to illness, poverty, and abuse.</p>
+			<p>Search for a country above to find out how much of its population is lacking the right to sanitation.</p>
+		</div> -->
+		<div class="dataInfo">
+			<h2 id="countryName"></h2>
+			<h3>Percentage of population without improved sanitation facilities</h3>
+			<div class="legend"><h5 id="percentage"><i class="fa fa-square" id="haves"></i> Haves</h5><h5 id="percentage"><i class="fa fa-square" id="have-nots"></i> Have Nots</h5></div>
+		</div>
+		<div class="data three clearfix row">
+			<div id="total" class="col-sm-4">
 				<div class="chart">
+					<input type="text" class="dial" value="30">
 				</div>
-				<h4><span class="percent"></span>% of total population</h4>
+				<h4 class="haves"><span class="percent"></span>% of total population</h4>
 			</div>
-			<div id="rural">
+			<div id="rural" class="col-sm-4">
 				<div class="chart">
-					<!-- <input type="text" class="dial" value="30"> -->
+					<input type="text" class="dial" value="30">
 				</div>
 				<h4><span class="percent"></span>% of the rural population</h4>
 			</div>
-			<div id="urban">
+			<div id="urban" class="col-sm-4">
 				<div class="chart">
-				<!-- 	<input type="text" class="dial" value="60"> -->
+					<input type="text" class="dial" value="60">
 				</div>
 				<h4><span class="percent"></span>% of the urban population</h4>
 			</div>
 		</div>
-	</section>
-	<section class="countryData two">
-		<h3 id="countryName"><!-- Afghanistan --></h3>
-		<h4 id="percentage">What percentage of the population uses improved sanitation facilities?</h4>
-		<div class="data clearfix">
-			<div id="area1">
+		<div class="data two clearfix row">
+			<div id="area1" class="col-md-6">
 				<div class="chart">
+					<input type="text" class="dial" value="30">
 				</div>
 				<h4><span class="percent"></span>% of <span class="area"></span> population</h4>
 			</div>
-			<div id="area2">
+			<div id="area2" class="col-md-6">
 				<div class="chart">
-					<!-- <input type="text" class="dial" value="30"> -->
+					<input type="text" class="dial" value="30">
 				</div>
 				<h4><span class="percent"></span>% of <span class="area"></span> population</h4>
 			</div>
 		</div>
-	</section>
-	<section class="countryData one">
-		<h3 id="countryName"><!-- Afghanistan --></h3>
-		<h4 id="percentage">What percentage of the population uses improved sanitation facilities?</h4>
-		<div class="data clearfix">
-			<div id="area">
+		<div class="data one clearfix">
+			<div id="area" class="row">
 				<div class="chart">
+					<input type="text" class="dial" value="30">
 				</div>
 				<h4><span class="percent"></span>% of <span class="area"></span> population</h4>
 			</div>
@@ -99,6 +114,8 @@
 	</footer>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="js/jquery.knob.js"></script>
 <script src="js/script.js"></script>
 	
