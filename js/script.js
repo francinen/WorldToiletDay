@@ -10,7 +10,7 @@ toiletApp.init = function(){
 };
 
 toiletApp.pageLoad = function(){
-	$('#pageload').hide();
+	$('.pageLoad').hide();
 	$('form').css('visibility','visible');
 };
 
@@ -90,7 +90,7 @@ toiletApp.userInput = function(country, apiID, apiKey){
 	if (!country.match(/\s/g)){
 		toiletApp.ajaxRequest(country, apiID, apiKey);
 	}else{
-		country = el.value.replace(/\s/g, '%20');
+		country = selected.value.replace(/\s/g, '%20');
 		toiletApp.ajaxRequest(country, apiID, apiKey);
 	}		
 };
@@ -112,7 +112,13 @@ toiletApp.getCountryData = function(){
 		toiletApp.userInput(country, apiID, apiKey);	
 	});
 	$('.ui-autocomplete').on('click','li',function(){
+		console.log('I work!');
 		toiletApp.userInput(country, apiID, apiKey);	
+	});
+	$('#searchCountry').on('keydown', function(e){
+		if (e.keyCode == 13) {
+			toiletApp.userInput(country, apiID, apiKey);
+		}
 	});
 	$('#random').on('click', function(){
 		toiletApp.randomCountry(arrCountryNames, country, apiID, apiKey);
@@ -231,6 +237,15 @@ $(function(){
 	$('body').on('click', 'button', function(e){
 		e.preventDefault();
 	});
+	
+	function spinningPoop(n){
+		TweenMax.to($('#poop1'), n, {rotation:"+=360"});
+		TweenMax.to($('#poop2'), n, {rotation:"+=360", delay: 0.7});
+		TweenMax.to($('#poop3'), n, {rotation:"+=360",delay: 1.4, onComplete:function(){spinningPoop(n)}});
+	};
+
+	spinningPoop(0.9);
+	
 	toiletApp.init();
 	function toggleList(){
 		$('#countryList').toggleClass('fa-sort-desc').toggleClass('fa-sort-asc');

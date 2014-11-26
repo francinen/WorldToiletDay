@@ -166,20 +166,6 @@ header {
     width: 35%;
     padding-left: 20px; }
 
-#pageload object {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  position: relative; }
-  #pageload object #pipes {
-    width: 100%;
-    height: 100%; }
-  #pageload object #poopLoad {
-    width: 60px;
-    position: absolute;
-    top: 0;
-    z-index: -100; }
-
 form {
   width: 100%;
   opacity: 0;
@@ -384,3 +370,18 @@ section.countryData {
 #pageload {
   text-align: center;
   padding: 10% 0; }
+
+.pageLoad {
+  width: 40%;
+  margin: 0 auto; }
+  .pageLoad object {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    position: relative; }
+    .pageLoad object svg {
+      width: 100%;
+      height: 100%; }
+    .pageLoad object #gradient {
+      position: absolute;
+      top: 100%; }
