@@ -66,6 +66,25 @@ form, fieldset {
 	position: relative;
 }
 
+.selectCountry i, .randomSearch i, #searchButton i {
+	font-size: $fontSize;
+	margin-left: 8px;
+	color: $primaryColour;
+	opacity: 0.6;
+	-webkit-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+}
+
+.selectCountry, .randomSearch {
+	&:hover {
+		cursor: pointer;
+	}
+	&:hover i {
+		opacity: 1;
+	}
+}
+
+
 select.countries {
 	position: absolute;
 	top: 90%;
@@ -88,6 +107,32 @@ select.countries {
 	}
 }
 
+#searchCountry {
+	position: relative;
+}  
+.ui-autocomplete .ui-menu-item {
+	list-style-type: none;
+	-webkit-transition: all 0.1s;
+	transition: all 0.1s;
+	@include fontStack;
+	font-size: $fontSize;
+	&:nth-child(odd){
+		background: darken($bodyBkg, 4);
+	}
+	&:nth-child(even){
+		background: $bodyBkg;
+	}
+	&:hover, &:focus {
+		background: darken($bodyBkg, 15);
+		border: none;
+		box-shadow: none;
+		color: #fff;
+		cursor: pointer;
+		outline: none;
+		list-style-image: none;
+	}
+}
+
 input[name="searchCountry"]{
 	border: none;
 	background: none;
@@ -103,7 +148,11 @@ button.random, button#searchButton {
 	box-shadow: none;
 	border: none;
 	background: none;
-	// color: $primaryColour;
+	color: $primaryColour;
+}
+
+.randomSearch {
+	text-align: center;
 }
 
 .selected {
@@ -146,4 +195,14 @@ section.countryData {
 #pageload {
 	text-align: center;
 	padding: 10% 0;
+}
+
+.error {
+	h3 {
+		width: 50%;
+		margin: 0 auto;
+	}
+	svg {
+		fill: #8a6755;
+	}
 }

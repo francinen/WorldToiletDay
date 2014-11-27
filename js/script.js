@@ -5,13 +5,34 @@ var apiKey = 'e0c56e76772fe67b98846adfc6c09565';
 var $countriesList = $('select.countries');
 var arrCountryNames = [];
 
+var $chart = $('.chart').find('canvas');
+var tl = new TimelineLite();
 toiletApp.init = function(){
 	toiletApp.getCountries();
 };
 
 toiletApp.pageLoad = function(){
-	$('.pageLoad').hide();
-	$('form').css('visibility','visible');
+	$('#pageLoad').show();
+	function spinningPoop(n){
+		tl.to($('#poop1'), n, {rotation:"+=360"}).to($('#poop2'), n, {rotation:"+=360"}).to($('#poop3'), n, {rotation:"+=360", onComplete:function(){spinningPoop(n)}});
+	}
+	spinningPoop(0.9);
+};
+
+toiletApp.initialLoad = function(){
+		tl.staggerFrom($('form fieldset'),0.8,{autoAlpha:0},0.6)
+		.to($('.countryData'),0.8,{autoAlpha:1});
+		toiletApp.ui();
+};
+
+toiletApp.dataLoad = function(){
+	$('.content').css('opacity',0.6);
+	$('#dataLoad').show();
+	function flushingData(n){
+		TweenLite.to($('#flush'), n, {rotation:"+=360", ease:Linear.easeNone, onComplete:function(){flushingData(n)}});
+		TweenMax.staggerFrom('#flush path',n, {scale:0, autoAlpha:0}, 0.1);
+	}
+	flushingData(1.6);
 };
 
 toiletApp.displayData = function(){
@@ -22,6 +43,30 @@ toiletApp.displayData = function(){
 		fgColor: '#8a6755',
 		bgColor: '#a2af9f'
 	});
+	
+};
+
+toiletApp.hideCountryList = function(){
+	$('select').slideUp(600,function(){
+		$('#countryList').addClass('fa-chevron-down').removeClass('fa-chevron-up');
+	});
+};
+
+toiletApp.ui = function(){
+	$('select, .selectCountry').on('click', function(){
+		$('select').slideToggle(600,function(){
+			$('#countryList').toggleClass('fa-chevron-down').toggleClass('fa-chevron-up');
+		});
+	});
+	$('input#searchCountry').on('click hover',function(){
+		$('.fa-search').css({'opacity':1});
+		toiletApp.hideCountryList();
+	});
+	$('#random').on('click', function(){
+		toiletApp.hideCountryList();
+		$('input#searchCountry').val('');
+	});
+
 };
 
 toiletApp.getCountries = function(){
@@ -29,25 +74,35 @@ toiletApp.getCountries = function(){
 		url: 'http://api.undata-api.org/WHO/Proportion%20of%20population%20using%20improved%20sanitation%20facilities/countries?app_id='+apiID+'&app_key='+apiKey,
 		type: 'GET',
 		dataType: 'json',
-		success: function(countries){
-			$('form').css({'opacity':1});
-			$('.countryData').fadeIn();
-			console.log(countries);
-			for (var i=0;i<countries.length;i++){
-				arrCountryNames.push(countries[i].name);
-			}
-			arrCountryNames = arrCountryNames.sort();
-			toiletApp.listCountries(arrCountryNames);
-			toiletApp.autoComplete(arrCountryNames);
-			toiletApp.getCountryData();
+		beforeSend: function(){
 			toiletApp.pageLoad();
+		},
+		error: function(request, status, error){
+			$('div.one, div.two, div.three, #pageLoad, div.default').hide();
+			$('div.error').show();
+			$('#errorMessage').text('Unable to access data.');
+			$('#action').text('Please try again later');
+		},
+		success: function(countries){
+			setTimeout(function(){
+				for (var i=0;i<countries.length;i++){
+					arrCountryNames.push(countries[i].name);
+				}
+				arrCountryNames = arrCountryNames.sort();
+				toiletApp.listCountries(arrCountryNames);
+				toiletApp.autoComplete(arrCountryNames);
+				toiletApp.getCountryData(arrCountryNames);
+				$('#pageLoad').fadeOut(500);
+				toiletApp.initialLoad();
+			},1300);
 		}
 	});
 };
 
 toiletApp.autoComplete = function(arr){
 	$('#searchCountry').autocomplete({
-		source: arr
+		source: arr,
+		minLength: 2
 	});
 };
 
@@ -56,10 +111,24 @@ toiletApp.ajaxRequest = function(country, apiID, apiKey){
 		url: 'http://api.undata-api.org/WHO/Proportion%20of%20population%20using%20improved%20sanitation%20facilities/'+country+'/records?app_id='+apiID+'&app_key='+apiKey,
 		type: 'GET',
 		dataType: 'json',
+		beforeSend: function(){
+			toiletApp.dataLoad();
+		},
+		error: function(){
+			$('div.one, div.two, div.three').hide();
+			$('div.error').show();
+			$('#errorMessage').text('Unable to access data.');
+			$('#action').text('Please try again later');
+		},
 		success: function(countryData){
-			console.log(countryData);
-			$('.chart').empty();
-			toiletApp.parseCountryData(countryData);
+			setTimeout(function(){
+				console.log(countryData);
+				$('.chart').empty();
+				toiletApp.parseCountryData(countryData);
+				$('#dataLoad').hide();
+				$('.content').css('opacity',1);
+			}, 500);
+
 		}
 	});
 };
@@ -84,10 +153,15 @@ toiletApp.randomCountry = function(arr, country, apiID, apiKey){
 		}		
 };
 
-toiletApp.userInput = function(country, apiID, apiKey){
+toiletApp.userInput = function(countryList, country, apiID, apiKey){
 		selected = document.querySelector('#searchCountry');
 	country = selected.value;
-	if (!country.match(/\s/g)){
+	if (countryList.indexOf(country)==-1){
+		$('div.one, div.two, div.three, div.default').hide();
+		$('div.error').show();
+		$('#errorMessage').text('Looks like '+country+' isn\'t included in the database.');
+		$('#action').text('Please try another');
+	}else if (!country.match(/\s/g)){
 		toiletApp.ajaxRequest(country, apiID, apiKey);
 	}else{
 		country = selected.value.replace(/\s/g, '%20');
@@ -95,7 +169,7 @@ toiletApp.userInput = function(country, apiID, apiKey){
 	}		
 };
 
-toiletApp.getCountryData = function(){
+toiletApp.getCountryData = function(arrCountryNames){
 	var country;
 	var selected;
 	$('.countries').change(function(){
@@ -109,15 +183,15 @@ toiletApp.getCountryData = function(){
 		}	
 	});
 	$('#searchButton').on('click', function(e){
-		toiletApp.userInput(country, apiID, apiKey);	
+		toiletApp.userInput(arrCountryNames, country, apiID, apiKey);	
 	});
 	$('.ui-autocomplete').on('click','li',function(){
 		console.log('I work!');
-		toiletApp.userInput(country, apiID, apiKey);	
+		toiletApp.userInput(arrCountryNames, country, apiID, apiKey);	
 	});
 	$('#searchCountry').on('keydown', function(e){
 		if (e.keyCode == 13) {
-			toiletApp.userInput(country, apiID, apiKey);
+			toiletApp.userInput(arrCountryNames, country, apiID, apiKey);
 		}
 	});
 	$('#random').on('click', function(){
@@ -131,7 +205,7 @@ toiletApp.showOne = function(countryData, area, percent, chart){
 	i=0;
 	$('div.dataInfo, div.one').show();
 	$('div.three, div.two').hide(); 
-	$('section.error, div.default').hide();
+	$('div.error, div.default').hide();
 	$('#area .chart').prepend(chart);
 	toiletApp.displayData();
 	$('#area').find('.percent').text(countryData[i].value);
@@ -141,14 +215,14 @@ toiletApp.showOne = function(countryData, area, percent, chart){
 toiletApp.showTwo = function(){
 	$('div.dataInfo, div.two').show();
 	$('div.three, div.one').hide();
-	$('section.error, div.default').hide();
+	$('div.error, div.default').hide();
 
 };
 
 toiletApp.showThree = function(countryData, area, percent, chart, id){
 	$('div.dataInfo, div.three').show();
 	$('div.one, div.two').hide(); 
-	$('section.error, div.default').hide();
+	$('div.error, div.default').hide();
 	$('#'+id+' .chart').prepend(chart);
 	toiletApp.displayData();
 	$('#'+id).find('.percent').text(percent);
@@ -205,9 +279,10 @@ toiletApp.evalData = function(i, area, percent, countryData, id){
 
 toiletApp.parseCountryData = function(countryData){
 	if (countryData[2].year != 2006 && countryData[1].year != 2006 && countryData[0].year != 2006){
-		$('section.one, section.two, section.three').hide();
-		$('section.error').show();
-		$('#countryNameError').text(countryData[2].area_name);	
+		$('div.one, div.two, div.three').hide();
+		$('div.error').show();
+		$('#errorMessage').text('Sorry, there\'s not enough data about '+countryData[2].area_name+'.');
+		$('#action').text('Please select another');	
 	}else{
 		$('#countryName').text(countryData[0].area_name);
 		for (i=2;i>=0;i--){
@@ -225,8 +300,9 @@ toiletApp.parseCountryData = function(countryData){
 			} //END OF IF STATEMENT
 			else{
 				$('section.one, section.two, section.three').hide();
-				$('section.error').show();
-				$('#countryNameError').text(countryData[2].area_name);	
+				$('div.error').show();
+				$('#errorMessage').text('Sorry, there\'s not enough data about '+countryData[2].area_name+'.');
+				$('#action').text('Please select another');	
 			}
 		} //END OF FOR LOOP
 	}
@@ -234,34 +310,23 @@ toiletApp.parseCountryData = function(countryData){
 }; //END OF METHOD
 
 $(function(){
+	function toggleList(){
+		$('select').slideToggle(600,function(){
+			$('#countryList').toggleClass('fa-chevron-down').toggleClass('fa-chevron-up');
+		});
+	}
+	// toiletApp.init();
 	$('body').on('click', 'button', function(e){
 		e.preventDefault();
-	});
-	
-	function spinningPoop(n){
-		TweenMax.to($('#poop1'), n, {rotation:"+=360"});
-		TweenMax.to($('#poop2'), n, {rotation:"+=360", delay: 0.7});
-		TweenMax.to($('#poop3'), n, {rotation:"+=360",delay: 1.4, onComplete:function(){spinningPoop(n)}});
-	};
+	});		
 
-	spinningPoop(0.9);
-	
-	toiletApp.init();
-	function toggleList(){
-		$('#countryList').toggleClass('fa-sort-desc').toggleClass('fa-sort-asc');
-		$('select').slideToggle(800);
-	}
-	$('.selectCountry').on('click', function(){
-		toggleList();
-	});
-	$('select').on('click', 'option', function(){
-		toggleList();
-	});
-	$('.dial').knob({
-		readOnly: true,
-		width: '90%',
-		thickness: '.25',
-		fgColor: '#8a6755',
-		bgColor: '#d7d8be'
-	});
+
+	// For testing purposes only
+	// $('.dial').knob({
+	// 	readOnly: true,
+	// 	width: '90%',
+	// 	thickness: '.25',
+	// 	fgColor: '#8a6755',
+	// 	bgColor: '#d7d8be'
+	// });
 });
