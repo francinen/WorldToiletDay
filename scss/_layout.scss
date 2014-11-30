@@ -33,90 +33,37 @@ header {
 		padding-left: 20px;
 	}
 }
-
-
-
-.loading {
-
+form, section.countryData, footer {
+	position: relative;
+	top: -40px;
 }
-
-// form,
-// section.countryData {
-// 	float: left;
-// }
-
 form {
-	width: 100%;
+
 	// overflow: hidden;
-	// display: none;
+	opacity: 0;
 	-webkit-transition: opacity 0.9s;
 	transition: opacity 0.9s;
 	h2 {
 		text-align: center;
 		margin-bottom: 30px;
 	}
-	fieldset {
-		margin: 0;
+	fieldset.mainSearch {
+		min-width: 380px;
+		margin: 0 auto;
 		border: none;
 		position: relative;
-		// border-right: 1px solid white;
-		&:first-of-type, &:nth-of-type(2) {
-			&:after {
-				display: inline-block;
-				content: 'or';
-				position: absolute;
-				top:10px;
-				color: $primaryColour;
-				font-size: $fontSize*1.2;
-				letter-spacing: 2px;
-			}
+		text-align: center;
+		input {
+			width: 75%;
+			text-align: center;
 		}
-		&:first-of-type {
-			&:after {
-				right: 50px;
-			}
-		}
-		&:nth-of-type(2){
-			&:after {
-				right: 0;
-			}
-		}
-		&:last-of-type {
-			// border-right: none;
-		}
-		// visibility: hidden;
-	}
-	fieldset:nth-child(2){
-		padding-left: 50px;
 	}
 }
 
 #searchButton {
 	position: absolute;
-	top: 10px;
-	right: 70px;
-}
-
-
-#countryList {
-	display: none;
-}
-
-.countries, .ui-autocomplete {
-	border: none;
-	background: none;
-	box-shadow: none;
-	option, .ui-menu-item {
-		padding: 10px;
-		border: none;
-		box-shadow: none;
-	}
-}
-
-select.countries {
-	width: 100%;
-	border-radius: 0 0 7px 7px;
-	display: none;
+	right: 7%;
+	bottom: 25%;
 }
 
 #searchCountry {
@@ -129,16 +76,15 @@ select.countries {
 }
 
 section.countryData {
-	margin: 40px auto;
-	min-height: 500px;
-	padding: 30px;
+	width: 90%;
+	margin: 40px auto 10px;
+	// padding: 30px;
 	text-align: center;
-	background: rgba(250,250,250,0.3);
 	visibility: hidden;
 	// display: none;
 	div.default {
 		width: 70%;
-		margin: 80px auto;
+		margin: 0 auto;
 		// display: none;
 	}
 	div.data {
@@ -152,38 +98,59 @@ div.one {
 	display: none;
 }
 
+div.chartContainer {
+	float: left;
+	margin: 0;
+}
+
+div.three {
+	div.chartContainer {
+		width: 33.3333%;
+	}
+}
+
+div.two {
+	div.chartContainer {
+		width: 50%;
+	}
+}
+
+div.one {
+	div.chartContainer {
+		float: none;
+		width: 40%;
+		margin: 0 auto;
+	}
+}
+
 div.legend {
 	margin: 20px 0 50px;
 	h5 {
-		width: 10%;
 		display: inline-block;
+		width: 15%;
+		min-width: 113px;
 	}
-	h5, i {
+	i {
 		margin-right: 5px;
 	}
 	#haves {
 		color: #a2af9f;
+		margin-right: 2%;
 	}
 	#have-nots {
 		color: #8a6755;
 	}
 }
 
-
-#total, .stats {
-	// float: left;
-}
-
 #total, #rural, #urban, #area1, #area2, #area {
-	// width: 85%;
 	div.chart {
 		div {
 		width: 100%;
-		min-width: 300px;
 		max-width: 350px;
-		min-height: 300px;
 		max-height: 350px;
 		margin: 0 auto;
+		background: rgba(250, 250, 250, 0.4);
+		border-radius: 50%;
 		}
 	}
 	
@@ -192,18 +159,10 @@ div.legend {
 #total, #rural, #urban, #area1, #area2, #area {
 	margin-bottom: 40px;
 	.chart {
-		margin-bottom: 20px;
+		margin-bottom: 5%;
 	}
 }
 
-// #rural,
-// #urban {
-// 	float: left;
-// 	width: 50%;
-// 	min-height: 200px;
-// 	max-height: 250px;
-// 	text-align: center;	
-// }
 #total > div,
 #rural > div, 
 #urban > div,
@@ -214,19 +173,12 @@ div.legend {
 	width: 100%;
 }
 
-// #rural {
-// 	padding-right: 5%;
-// }
-
-// #urban {
-// 	padding-left: 5%;
-// }
 
 div.error {
 	text-align: center;
 	display: none;
+	position: relative;
 	object {
-		margin-top: 50px;
 		width: 250px;
 		height: 250px;
 		display: inline-block;
@@ -240,10 +192,35 @@ div.error {
 	width: 55%;
 }
 
+button.info {
+	float: right;
+}
+
+// p.about-data {
+// 	width: 45%;
+// 	margin-left: 5%;
+// }
+
 footer {
 	width: 100%;
-	padding: 30px 20px;
+	padding: 0 40px;
+	margin-top: 130px;
+	clear: right;
+	visibility: hidden;
+	.fa-info-circle {
+		position: relative;
+		top: 1px;
+	}
 }
+
+div#dataLoad.show {
+	display: block;
+}
+
+div#dataLoad.hide {
+	display: block;
+}
+
 
 
 

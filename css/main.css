@@ -167,53 +167,31 @@ header {
     width: 35%;
     padding-left: 20px; }
 
+form, section.countryData, footer {
+  position: relative;
+  top: -40px; }
+
 form {
-  width: 100%;
+  opacity: 0;
   -webkit-transition: opacity 0.9s;
   transition: opacity 0.9s; }
   form h2 {
     text-align: center;
     margin-bottom: 30px; }
-  form fieldset {
-    margin: 0;
+  form fieldset.mainSearch {
+    min-width: 380px;
+    margin: 0 auto;
     border: none;
-    position: relative; }
-    form fieldset:first-of-type:after, form fieldset:nth-of-type(2):after {
-      display: inline-block;
-      content: 'or';
-      position: absolute;
-      top: 10px;
-      color: #fff;
-      font-size: 1.92rem;
-      letter-spacing: 2px; }
-    form fieldset:first-of-type:after {
-      right: 50px; }
-    form fieldset:nth-of-type(2):after {
-      right: 0; }
-  form fieldset:nth-child(2) {
-    padding-left: 50px; }
+    position: relative;
+    text-align: center; }
+    form fieldset.mainSearch input {
+      width: 75%;
+      text-align: center; }
 
 #searchButton {
   position: absolute;
-  top: 10px;
-  right: 70px; }
-
-#countryList {
-  display: none; }
-
-.countries, .ui-autocomplete {
-  border: none;
-  background: none;
-  box-shadow: none; }
-  .countries option, .countries .ui-menu-item, .ui-autocomplete option, .ui-autocomplete .ui-menu-item {
-    padding: 10px;
-    border: none;
-    box-shadow: none; }
-
-select.countries {
-  width: 100%;
-  border-radius: 0 0 7px 7px;
-  display: none; }
+  right: 7%;
+  bottom: 25%; }
 
 #searchCountry {
   position: relative; }
@@ -223,54 +201,69 @@ select.countries {
     top: 0; }
 
 section.countryData {
-  margin: 40px auto;
-  min-height: 500px;
-  padding: 30px;
+  width: 90%;
+  margin: 40px auto 10px;
   text-align: center;
-  background: rgba(250, 250, 250, 0.3);
   visibility: hidden; }
   section.countryData div.default {
     width: 70%;
-    margin: 80px auto; }
+    margin: 0 auto; }
   section.countryData div.data {
     margin: 0 auto; }
 
 div.dataInfo, div.three, div.two, div.one {
   display: none; }
 
+div.chartContainer {
+  float: left;
+  margin: 0; }
+
+div.three div.chartContainer {
+  width: 33.3333%; }
+
+div.two div.chartContainer {
+  width: 50%; }
+
+div.one div.chartContainer {
+  float: none;
+  width: 40%;
+  margin: 0 auto; }
+
 div.legend {
   margin: 20px 0 50px; }
   div.legend h5 {
-    width: 10%;
-    display: inline-block; }
-  div.legend h5, div.legend i {
+    display: inline-block;
+    width: 15%;
+    min-width: 113px; }
+  div.legend i {
     margin-right: 5px; }
   div.legend #haves {
-    color: #a2af9f; }
+    color: #a2af9f;
+    margin-right: 2%; }
   div.legend #have-nots {
     color: #8a6755; }
 
 #total div.chart div, #rural div.chart div, #urban div.chart div, #area1 div.chart div, #area2 div.chart div, #area div.chart div {
   width: 100%;
-  min-width: 300px;
   max-width: 350px;
-  min-height: 300px;
   max-height: 350px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  background: rgba(250, 250, 250, 0.4);
+  border-radius: 50%; }
 
 #total, #rural, #urban, #area1, #area2, #area {
   margin-bottom: 40px; }
   #total .chart, #rural .chart, #urban .chart, #area1 .chart, #area2 .chart, #area .chart {
-    margin-bottom: 20px; }
+    margin-bottom: 5%; }
 
 #total > div, #rural > div, #urban > div, #area > div, #area1 > div, #area2 > div {
   width: 100%; }
 
 div.error {
   text-align: center;
-  display: none; }
+  display: none;
+  position: relative; }
   div.error object {
-    margin-top: 50px;
     width: 250px;
     height: 250px;
     display: inline-block; }
@@ -280,16 +273,48 @@ div.error {
 .stats {
   width: 55%; }
 
+button.info {
+  float: right; }
+
 footer {
   width: 100%;
-  padding: 30px 20px; }
+  padding: 0 40px;
+  margin-top: 130px;
+  clear: right;
+  visibility: hidden; }
+  footer .fa-info-circle {
+    position: relative;
+    top: 1px; }
+
+div#dataLoad.show {
+  display: block; }
+
+div#dataLoad.hide {
+  display: block; }
 
 html {
   font-size: 62.5%; }
 
 body {
   font-family: 'Questrial', "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.6rem; }
+  font-size: 1.6rem;
+  line-height: 1.3; }
+  body a, body a:visited {
+    color: #29251f;
+    text-decoration: none;
+    border-bottom: none;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s; }
+    body a:hover, body a:visited:hover {
+      border-bottom: 1px dashed #29251f; }
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, .ui-autocomplete, .ui-autocomplete:hover, .ui-menu-item, .ui-menu-item:hover, .ui-menu-item a, .ui-menu-item a:hover, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active, .ui-menu .ui-menu-item a {
+  background: #ffffff none no-repeat;
+  padding: 0;
+  margin: 0;
+  display: block;
+  border: 0;
+  border-collapse: collapse; }
 
 h1, h2, h3, h4, h5, h6, p {
   margin: 0;
@@ -301,20 +326,24 @@ h1, h2, h3, h4, input[name="searchCountry"] {
 
 h1 {
   padding: 20px 0;
-  margin-bottom: 40px; }
+  text-align: center; }
   h1 span {
-    display: block; }
+    display: block;
+    position: relative; }
   h1 span.who {
     font-size: 4.8rem;
     letter-spacing: 3.6px;
     font-weight: 200;
-    color: #e6e6e6; }
+    color: #e6e6e6;
+    margin-bottom: -10px; }
   h1 span.sanitation {
-    font-size: 7.2rem;
+    font-size: 8.8rem;
+    letter-spacing: 1.4px;
     text-transform: uppercase; }
 
 p {
-  font-size: 1.6rem; }
+  font-size: 1.6rem;
+  letter-spacing: 1px; }
 
 header p {
   margin-bottom: 15px; }
@@ -332,19 +361,6 @@ header p {
 
 form, fieldset {
   position: relative; }
-
-.selectCountry i, .randomSearch i, #searchButton i {
-  font-size: 1.6rem;
-  margin-left: 8px;
-  color: #fff;
-  opacity: 0.6;
-  -webkit-transition: opacity 0.2s;
-  transition: opacity 0.2s; }
-
-.selectCountry:hover, .randomSearch:hover {
-  cursor: pointer; }
-.selectCountry:hover i, .randomSearch:hover i {
-  opacity: 1; }
 
 select.countries {
   position: absolute;
@@ -370,20 +386,47 @@ select.countries {
   list-style-type: none;
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
+  padding: 10px;
   font-family: 'Questrial', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.6rem; }
   .ui-autocomplete .ui-menu-item:nth-child(odd) {
     background: #f5f5f5; }
   .ui-autocomplete .ui-menu-item:nth-child(even) {
     background: #fff; }
-  .ui-autocomplete .ui-menu-item:hover, .ui-autocomplete .ui-menu-item:focus {
-    background: #d9d9d9;
-    border: none;
-    box-shadow: none;
-    color: #fff;
-    cursor: pointer;
-    outline: none;
-    list-style-image: none; }
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+  background: #d9d9d9 !important;
+  border: none;
+  box-shadow: none;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  list-style-image: none; }
+
+button {
+  box-shadow: none;
+  border: none;
+  background: none; }
+
+button#searchButton {
+  background: #fff;
+  opacity: 0.2;
+  padding: 15px;
+  border-radius: 50%;
+  -webkit-transition: opacity 0.7s;
+  transition: opacity 0.7s; }
+  button#searchButton i {
+    font-size: 1.92rem;
+    color: #a19583; }
+
+p.about-data {
+  font-size: 0.64rem;
+  color: #726756; }
+
+button.info {
+  color: #fff;
+  opacity: 0.6;
+  font-size: 2.4rem; }
 
 input[name="searchCountry"] {
   border: none;
@@ -393,13 +436,10 @@ input[name="searchCountry"] {
   outline: none;
   width: 70%;
   margin-left: 5px;
-  font-size: 2.4rem; }
-
-button.random, button#searchButton {
-  box-shadow: none;
-  border: none;
-  background: none;
-  color: #fff; }
+  font-size: 6.4rem;
+  color: #4f464d; }
+  input[name="searchCountry"]:hover + button#searchButton, input[name="searchCountry"]:focus + button#searchButton, input[name="searchCountry"]:active + button#searchButton {
+    opacity: 1; }
 
 .randomSearch {
   text-align: center; }
@@ -415,7 +455,7 @@ section.countryData {
   text-align: center; }
   section.countryData div.default p {
     font-size: 3.2rem;
-    color: #4f464d; }
+    color: #726756; }
     section.countryData div.default p:first-of-type {
       margin-bottom: 20px; }
   section.countryData h2, section.countryData h3 {
@@ -424,9 +464,12 @@ section.countryData {
     font-size: 6.4rem;
     margin-bottom: 20px; }
   section.countryData h3 {
-    font-size: 2.4rem; }
+    font-size: 2.4rem;
+    max-width: 630px;
+    width: 70%;
+    margin: 0 auto; }
   section.countryData h4 {
-    font-size: 2.08rem;
+    font-size: 1.76rem;
     color: #8a6755; }
   section.countryData h5#percentage {
     font-size: 1.6rem; }
@@ -440,6 +483,34 @@ section.countryData {
   margin: 0 auto; }
 .error svg {
   fill: #8a6755; }
+
+footer {
+  color: #726756; }
+  footer h5:first-of-type {
+    margin-bottom: 5px; }
+
+div.site-details, div.more-info {
+  display: inline-block;
+  margin: 0;
+  width: 49%; }
+
+div.more-info {
+  background: rgba(250, 250, 250, 0.3);
+  padding: 30px 30px 150px; }
+  div.more-info ul {
+    margin: 0 auto 30px;
+    padding: 0; }
+    div.more-info ul li {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 5px; }
+    div.more-info ul i {
+      padding-left: 8px; }
+
+div.site-details {
+  vertical-align: bottom;
+  text-align: right;
+  padding-bottom: 40px; }
 
 .loader {
   width: 35%;
@@ -460,15 +531,14 @@ section.countryData {
   #pageLoad h2 {
     text-align: center;
     clear: left;
-    color: #4f464d;
+    color: #726756;
     padding-top: 20px; }
   #pageLoad object {
     float: left;
-    width: 33.33333%;
+    width: 32%;
     height: 65px; }
-    #pageLoad object #gradient {
-      position: absolute;
-      top: 100%; }
+    #pageLoad object:first-of-type, #pageLoad object:nth-of-type(2) {
+      margin-right: 2%; }
 
 #dataLoad {
   text-align: center;
@@ -481,3 +551,39 @@ section.countryData {
     margin: 0 auto; }
     #dataLoad object svg {
       fill: #fff; }
+
+@media all and (max-width: 790px) {
+  #searchButton {
+    right: 8%; } }
+
+@media all and (max-width: 790px) {
+  div.site-details, div.more-info {
+    width: 60%; }
+  div.site-details {
+    text-align: left;
+    margin-top: 30px; } }
+
+@media all and (max-width: 750px) {
+  div.three div.chartContainer {
+    width: 50%;
+    margin: 0 auto;
+    float: none; } }
+
+@media all and (max-width: 600px) {
+  h1 {
+    margin-bottom: 12px;
+    text-align: left; }
+    h1 span.who {
+      font-size: 3.8rem; }
+    h1 span.sanitation {
+      font-size: 6.8rem; }
+  form fieldset.mainSearch {
+    margin: 0;
+    text-align: left; }
+    form fieldset.mainSearch input {
+      width: 83%; }
+  section.countryData div.default {
+    width: 90%;
+    margin-top: 30px; }
+    section.countryData div.default p {
+      font-size: 2.5rem; } }

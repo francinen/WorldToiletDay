@@ -1,0 +1,50 @@
+@media all and (max-width: 790px){
+	#searchButton {
+		right: 8%;
+	}
+}
+
+@media all and (max-width: 790px){
+	div.site-details, div.more-info {
+		width: 60%;
+	}
+	div.site-details {
+		text-align: left;
+		margin-top: 30px;
+	}
+}
+
+@media all and (max-width: 750px){
+	div.three div.chartContainer {
+		width: 50%;
+		margin: 0 auto;
+		float: none;
+	}
+}
+
+@media all and (max-width: 600px){
+	h1 {
+		margin-bottom: 12px;
+		text-align: left;
+		span.who {
+			font-size: 3.8rem;
+		}
+		span.sanitation {
+			font-size: 6.8rem;
+		}
+	}
+	form fieldset.mainSearch {
+		margin: 0;
+		text-align: left;
+		input {
+			width: 83%;
+		}
+	}
+	section.countryData div.default {
+		width: 90%;
+		margin-top: 30px;
+		p {
+			font-size: 2.5rem;
+		}
+	}
+}

@@ -1,6 +1,5 @@
 .loader {
 	width: 35%;
-	
 	margin: 0 auto;
 	position: absolute;
 	top: 0;
@@ -23,21 +22,14 @@
 	}
 	object {
 		float: left;
-		width: 33.333333%;
+		width: 32%;
 		height: 65px;
-		// margin: 0 auto;
-		#gradient {
-			position: absolute;
-			top: 100%;
+		&:first-of-type,
+		&:nth-of-type(2) {
+			margin-right: 2%;
 		}
+		// margin: 0 auto;
 	}
-
-	// .stop1 {
-	// 	stop-color: #754600;
-	// }
-	// .stop2 {
-	// 	stop-color: #331600;
-	// }
 	display: none;
 }
 
