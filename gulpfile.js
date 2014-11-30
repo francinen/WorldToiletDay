@@ -8,7 +8,7 @@ var rename = require('gulp-rename');
 gulp.task('sass', function(){
 	return gulp.src('scss/main.scss')
 	.pipe(sass())
-	.pipe(gulp.dest('css'))
+	.pipe(gulp.dest('dist'))
 });
 
 gulp.task('lint', function(){
@@ -18,10 +18,10 @@ gulp.task('lint', function(){
 })
 
 gulp.task('scripts', function(){
-	return gulp.src('js/*.js')
-	.pipe(concat(all.js))
+	return gulp.src('js/script.js')
+	.pipe(concat('script.js'))
 	.pipe(gulp.dest('dist'))
-	.pipe(rename('all.min.js'))
+	.pipe(rename('script.min.js'))
 	.pipe(uglify())
 	.pipe(gulp.dest('dist'))
 });

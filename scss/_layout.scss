@@ -43,6 +43,9 @@ form {
 	opacity: 0;
 	-webkit-transition: opacity 0.9s;
 	transition: opacity 0.9s;
+	label {
+		display:none;
+	}
 	h2 {
 		text-align: center;
 		margin-bottom: 30px;
@@ -173,6 +176,9 @@ div.legend {
 	width: 100%;
 }
 
+.universal {
+	display: none;
+}
 
 div.error {
 	text-align: center;
@@ -213,14 +219,11 @@ footer {
 	}
 }
 
-div#dataLoad.show {
-	display: block;
+div#dataLoad {
+	h2 {
+		display: none;
+	}
 }
-
-div#dataLoad.hide {
-	display: block;
-}
-
 
 
 

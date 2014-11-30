@@ -175,6 +175,8 @@ form {
   opacity: 0;
   -webkit-transition: opacity 0.9s;
   transition: opacity 0.9s; }
+  form label {
+    display: none; }
   form h2 {
     text-align: center;
     margin-bottom: 30px; }
@@ -259,6 +261,9 @@ div.legend {
 #total > div, #rural > div, #urban > div, #area > div, #area1 > div, #area2 > div {
   width: 100%; }
 
+.universal {
+  display: none; }
+
 div.error {
   text-align: center;
   display: none;
@@ -286,11 +291,8 @@ footer {
     position: relative;
     top: 1px; }
 
-div#dataLoad.show {
-  display: block; }
-
-div#dataLoad.hide {
-  display: block; }
+div#dataLoad h2 {
+  display: none; }
 
 html {
   font-size: 62.5%; }
@@ -320,8 +322,8 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0; }
 
-h1, h2, h3, h4, input[name="searchCountry"] {
-  font-family: 'corehumanistsansregular';
+h1, h2, h3, h4, input {
+  font-family: 'corehumanistsansregular' !important;
   color: #fff; }
 
 h1 {
@@ -335,7 +337,8 @@ h1 {
     letter-spacing: 3.6px;
     font-weight: 200;
     color: #e6e6e6;
-    margin-bottom: -10px; }
+    margin-bottom: -10px;
+    text-transform: lowercase; }
   h1 span.sanitation {
     font-size: 8.8rem;
     letter-spacing: 1.4px;
@@ -380,7 +383,8 @@ select.countries {
       cursor: pointer; }
 
 #searchCountry {
-  position: relative; }
+  position: relative;
+  text-transform: capitalize; }
 
 .ui-autocomplete .ui-menu-item {
   list-style-type: none;
@@ -415,13 +419,22 @@ button#searchButton {
   border-radius: 50%;
   -webkit-transition: opacity 0.7s;
   transition: opacity 0.7s; }
+  button#searchButton:hover {
+    opacity: 1; }
+  button#searchButton h3 {
+    display: none; }
   button#searchButton i {
     font-size: 1.92rem;
     color: #a19583; }
 
+span.readers {
+  display: none; }
+
 p.about-data {
   font-size: 0.64rem;
   color: #726756; }
+  p.about-data:first-of-type {
+    margin-bottom: 10px; }
 
 button.info {
   color: #fff;
@@ -471,6 +484,9 @@ section.countryData {
   section.countryData h4 {
     font-size: 1.76rem;
     color: #8a6755; }
+  section.countryData h4.universal {
+    font-size: 2.08rem;
+    color: #6e7f69; }
   section.countryData h5#percentage {
     font-size: 1.6rem; }
 
