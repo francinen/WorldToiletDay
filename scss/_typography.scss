@@ -181,7 +181,7 @@ span.readers {
 }
 
 p.about-data {
-	font-size: $fontSize*0.4;
+	font-size: $fontSize;
 	color: $secondaryColour;
 	&:first-of-type {
 		margin-bottom: 10px;
@@ -212,7 +212,61 @@ input[name="searchCountry"]{
 	}
 }
 
+::-webkit-input-placeholder {
+   color: $secondaryColour !important;
+   opacity: 0.7;
+}
+input:focus::-webkit-input-placeholder {
+   color: $secondaryColour !important;
+   opacity: 0.3;
+}
 
+:-moz-placeholder { /* Firefox 18- */
+   color: $secondaryColour !important;
+   opacity: 0.7;  
+}
+input:focus:-moz-placeholder { /* Firefox 18- */
+   color: $secondaryColour !important;
+   opacity: 0.3;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $secondaryColour !important;
+   opacity: 0.7;  
+}
+input:focus::-moz-placeholder {  /* Firefox 19+ */
+   color: $secondaryColour !important;
+   opacity: 0.3;  
+}
+
+:-ms-input-placeholder {  
+   color: $secondaryColour !important;
+   opacity: 0.7;  
+}
+input:focus:-ms-input-placeholder {  
+   color: $secondaryColour !important;
+   opacity: 0.3;  
+}
+
+
+input[name="searchCountry"] {
+	&:active {
+		::-webkit-input-placeholder {
+		   color: $secondaryColour !important;
+		   opacity: 0.3;
+		}
+
+		:-moz-placeholder { /* Firefox 18- */
+		   color: $secondaryColour !important;
+		   opacity: 0.3;  
+		}
+
+		::-moz-placeholder {  /* Firefox 19+ */
+		   color: $secondaryColour !important;
+		   opacity: 0.3;  
+		}
+	}
+}
 
 .randomSearch {
 	text-align: center;
@@ -300,15 +354,6 @@ div.more-info {
 			list-style-type: none;
 			padding: 0;
 			margin-top: 5px;
-			// &:first-child, &:nth-child(2){
-			// 	width: 40%;
-			// }
-			// &:first-child {
-			// 	border-right: 1px solid $secondaryColour;
-			// }
-			// &:nth-child(2){
-			// 	padding-left: 8px;
-			// }
 		}
 		i {
 			padding-left: 8px;

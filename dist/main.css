@@ -431,7 +431,7 @@ span.readers {
   display: none; }
 
 p.about-data {
-  font-size: 0.64rem;
+  font-size: 1.6rem;
   color: #726756; }
   p.about-data:first-of-type {
     margin-bottom: 10px; }
@@ -453,6 +453,54 @@ input[name="searchCountry"] {
   color: #4f464d; }
   input[name="searchCountry"]:hover + button#searchButton, input[name="searchCountry"]:focus + button#searchButton, input[name="searchCountry"]:active + button#searchButton {
     opacity: 1; }
+
+::-webkit-input-placeholder {
+  color: #726756 !important;
+  opacity: 0.7; }
+
+input:focus::-webkit-input-placeholder {
+  color: #726756 !important;
+  opacity: 0.3; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #726756 !important;
+  opacity: 0.7; }
+
+input:focus:-moz-placeholder {
+  /* Firefox 18- */
+  color: #726756 !important;
+  opacity: 0.3; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #726756 !important;
+  opacity: 0.7; }
+
+input:focus::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #726756 !important;
+  opacity: 0.3; }
+
+:-ms-input-placeholder {
+  color: #726756 !important;
+  opacity: 0.7; }
+
+input:focus:-ms-input-placeholder {
+  color: #726756 !important;
+  opacity: 0.3; }
+
+input[name="searchCountry"]:active ::-webkit-input-placeholder {
+  color: #726756 !important;
+  opacity: 0.3; }
+input[name="searchCountry"]:active :-moz-placeholder {
+  /* Firefox 18- */
+  color: #726756 !important;
+  opacity: 0.3; }
+input[name="searchCountry"]:active ::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #726756 !important;
+  opacity: 0.3; }
 
 .randomSearch {
   text-align: center; }
@@ -568,16 +616,32 @@ div.site-details {
     #dataLoad object svg {
       fill: #fff; }
 
-@media all and (max-width: 790px) {
-  #searchButton {
-    right: 8%; } }
+@media all and (max-width: 860px) {
+  button#searchButton {
+    padding: 12px;
+    position: static;
+    display: block;
+    text-align: center;
+    margin: 15px auto 0;
+    right: 0; } }
+
+@media all and (max-width: 840px) {
+  input[name="searchCountry"] {
+    font-size: 3.2rem; } }
+
+@media all and (min-height: 790px) {
+  body {
+    background: url(../assets/img/bkg.jpg) no-repeat;
+    background-size: cover; } }
 
 @media all and (max-width: 790px) {
   div.site-details, div.more-info {
-    width: 60%; }
+    width: 100%; }
   div.site-details {
     text-align: left;
-    margin-top: 30px; } }
+    margin-top: 30px; }
+  #searchButton {
+    right: 5%; } }
 
 @media all and (max-width: 750px) {
   div.three div.chartContainer {
@@ -586,20 +650,85 @@ div.site-details {
     float: none; } }
 
 @media all and (max-width: 600px) {
+  #pageLoad {
+    width: 45%; }
+    #pageLoad object:first-of-type, #pageLoad #pageLoad object:nth-of-type(2) {
+      margin-right: 5%; }
+    #pageLoad object {
+      width: 30%; }
   h1 {
-    margin-bottom: 12px;
-    text-align: left; }
+    margin-bottom: 12px; }
     h1 span.who {
       font-size: 3.8rem; }
     h1 span.sanitation {
       font-size: 6.8rem; }
-  form fieldset.mainSearch {
-    margin: 0;
-    text-align: left; }
-    form fieldset.mainSearch input {
-      width: 83%; }
+  form fieldset.mainSearch input {
+    width: 95%; }
   section.countryData div.default {
     width: 90%;
     margin-top: 30px; }
     section.countryData div.default p {
-      font-size: 2.5rem; } }
+      font-size: 2.5rem; }
+  input[name="searchCountry"] {
+    font-size: 2.72rem;
+    margin: 0 auto; } }
+
+@media all and (max-width: 470px) {
+  header {
+    padding-top: 30px; }
+  h1 {
+    margin-bottom: 12px;
+    text-align: center;
+    padding-bottom: 35px; }
+    h1 span.who {
+      font-size: 3.2rem; }
+    h1 span.sanitation {
+      font-size: 5rem; }
+  form fieldset.mainSearch input {
+    width: 83%; }
+  button#searchButton {
+    padding: 12px;
+    right: 4%; }
+  section.countryData div.default p {
+    text-align: center; }
+    section.countryData div.default p:first-of-type {
+      display: none; }
+  section.countryData h3 {
+    width: 100%;
+    font-size: 2rem; }
+  div.three div.chartContainer {
+    width: 100%; } }
+
+@media all and (max-width: 420px) { }
+
+@media all and (max-width: 320px) {
+  body {
+    background: url(../assets/img/bkg.jpg) no-repeat;
+    background-size: cover; }
+  header {
+    width: 95%;
+    margin: 0 auto; }
+  h1 {
+    margin-bottom: 12px;
+    text-align: center;
+    padding-bottom: 35px; }
+    h1 span.who {
+      font-size: 2.6rem; }
+    h1 span.sanitation {
+      font-size: 4.2rem; }
+  #pageLoad {
+    width: 60%; }
+  section.countryData div.default p {
+    display: none; }
+  form fieldset.mainSearch {
+    min-width: 0; }
+    form fieldset.mainSearch input {
+      width: 100%; }
+  footer {
+    padding: 0 20px; }
+  div.more-info {
+    padding-bottom: 30px; }
+    div.more-info h3, div.more-info ul {
+      display: none; }
+  p.about-data {
+    font-size: 1.3rem; } }

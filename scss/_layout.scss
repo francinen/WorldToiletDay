@@ -38,8 +38,6 @@ form, section.countryData, footer {
 	top: -40px;
 }
 form {
-
-	// overflow: hidden;
 	opacity: 0;
 	-webkit-transition: opacity 0.9s;
 	transition: opacity 0.9s;
@@ -84,11 +82,9 @@ section.countryData {
 	// padding: 30px;
 	text-align: center;
 	visibility: hidden;
-	// display: none;
 	div.default {
 		width: 70%;
 		margin: 0 auto;
-		// display: none;
 	}
 	div.data {
 		margin: 0 auto;
